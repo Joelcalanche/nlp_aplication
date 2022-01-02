@@ -28,6 +28,11 @@ import numpy as np
 import pandas as pd
 import sqlite3
 
+
+from sumy.parsers.plaintext import PlaintextParser
+from sumy.nlp.tokenizers import Tokenizer
+from sumy.summarizers.lex_rank import LexRankSummarizer
+
 # Crea una conexión a la base de datos SQLite
 con = sqlite3.connect(r"C:\Users\calanche\Desktop\projectNLP\bbc_db.sqlite")
 
@@ -105,7 +110,8 @@ def sumy_summarizer(docx):
 # Function to Analyse Tokens and Lemma
 @st.cache
 def text_analyzer(my_text):
-	nlp = spacy.load('en')
+	#before 'en'------> 'en_core_web_sm'
+	nlp = spacy.load("en_core_web_sm")
 	docx = nlp(my_text)
 	# tokens = [ token.text for token in docx]
 	allData = [('"Token":{},\n"Lemma":{}'.format(token.text,token.lemma_))for token in docx ]
@@ -114,7 +120,8 @@ def text_analyzer(my_text):
 # Function For Extracting Entities
 @st.cache
 def entity_analyzer(my_text):
-	nlp = spacy.load('en')
+	#before 'en'------> 'en_core_web_sm'
+	nlp = spacy.load("en_core_web_sm")
 	docx = nlp(my_text)
 	tokens = [ token.text for token in docx]
 	entities = [(entity.text,entity.label_)for entity in docx.ents]
@@ -171,7 +178,7 @@ def main():
 
 		message = r_2_str
 		st.write(message[0])
-		summary_options = st.selectbox("Choose Summarizer",['sumy','gensim'])
+		summary_options = st.selectbox("Choose Summarizer",['sumy'])
 		if st.button("Summarize"):
 			if summary_options == 'sumy':
 				st.text("Using Sumy Summarizer ..")
@@ -196,7 +203,7 @@ def main():
 
 	st.sidebar.subheader("By")
 	st.sidebar.text("Joel_calanche")
-	st.sidebar.text("Joel_calanche")
+	st.sidebar.text("^_^")
 	
 
 if __name__ == '__main__':
