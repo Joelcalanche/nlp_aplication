@@ -1,6 +1,7 @@
 
 
 matplotlib==3.5
+pybase64==1.2.1
 
 
 
