@@ -88,7 +88,7 @@ print(len(selected_title))
 
 
 # segundo filtro
-r_2 =  r_1["text_"][(r["title"] == selected_title)]
+r_2 =  r_1["text_"][(r_1["title"] == selected_title)]
 r_2_str = r_2.tolist()
 # print(type(r_2_str))
 # print(df_selected_team)
