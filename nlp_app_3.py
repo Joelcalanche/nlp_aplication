@@ -34,8 +34,9 @@ from sumy.nlp.tokenizers import Tokenizer
 from sumy.summarizers.lex_rank import LexRankSummarizer
 
 # Crea una conexión a la base de datos SQLite
-con = sqlite3.connect(r"C:\Users\calanche\Desktop\projectNLP\bbc_db.sqlite")
+# con = sqlite3.connect(r"C:\Users\calanche\Desktop\projectNLP\nlp_aplication\bbc_db.sqlite")
 
+con = sqlite3.connect("./bbc_db.sqlite")
 # Extrae los datos de la consulta directamente a un DataFrame
 bbc_df = pd.read_sql_query("SELECT * from bbc_db", con, parse_dates=["timestamps_"])
 # bbc_df.tail()
@@ -77,17 +78,17 @@ prueba = [selected_year.tolist()]
 print(prueba)
 # r = df_tmp[((df_tmp.timestamps_.dt.year.isin([2021])) & (df_tmp.timestamps_.dt.day.isin([24])))]r = df_tmp[((df_tmp.timestamps_.dt.year.isin([selected_year.tolist()])) & (df_tmp.timestamps_.dt.day.isin([selected_day.tolist()])))]
 r = df_tmp[((df_tmp.timestamps_.dt.year.isin([selected_year.tolist()])) & (df_tmp.timestamps_.dt.day.isin([selected_day.tolist()])) & (df_tmp.timestamps_.dt.month.isin([selected_month.tolist()])))]
-
+r_1 = r[:20]
 print("este es mi experimento",len(df_tmp))
-print(len(r))
-unique_titles = r["title"].unique().tolist()
+print(len(r_1))
+unique_titles = r_1["title"].unique().tolist()
 selected_title = st.sidebar.selectbox('titles', unique_titles)
 print(selected_title)
 print(len(selected_title))
 
 
 # segundo filtro
-r_2 =  r["text_"][(r["title"] == selected_title)]
+r_2 =  r_1["text_"][(r["title"] == selected_title)]
 r_2_str = r_2.tolist()
 # print(type(r_2_str))
 # print(df_selected_team)
