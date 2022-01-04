@@ -19,7 +19,7 @@ spacy==3.2.1
 
 spacy-legacy==3.0.8
 
-python -m spacy download en_core_web_sm
+pip install -U pip setuptools wheel
 
 
 
