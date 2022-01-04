@@ -28,6 +28,9 @@ import numpy as np
 import pandas as pd
 import sqlite3
 
+import nltk
+nltk.download('punkt')
+
 
 from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.tokenizers import Tokenizer
